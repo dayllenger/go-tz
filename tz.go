@@ -29,14 +29,10 @@ import (
 	"runtime/debug"
 )
 
-func init() {
-	load()
-}
-
 //go:embed shapefile.gz
 var tzShapeFile []byte
 
-func load() {
+func Load() {
 	g, err := gzip.NewReader(bytes.NewBuffer(tzShapeFile))
 	if err != nil {
 		panic(err)
@@ -163,7 +159,7 @@ func LoadGeoJSON(r io.Reader) error {
 	tzdata = FeatureCollection{}
 	err := json.NewDecoder(r).Decode(&tzdata)
 	if err != nil {
-		load()
+		Load()
 		return err
 	}
 	buildCenterCache()

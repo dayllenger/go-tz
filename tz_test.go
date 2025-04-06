@@ -6,6 +6,10 @@ import (
 	"testing"
 )
 
+func init() {
+	Load()
+}
+
 type result struct {
 	zones []string
 	err   error
